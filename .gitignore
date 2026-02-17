@@ -15,6 +15,7 @@ dist-ssr
 # Claude Brain memory file (portable, can be committed for team sharing)
 # Uncomment the next line to exclude memory from version control:
 # .claude/mind.mv2
+.claude/mind.mv2.lock
 
 # Claude local settings (machine-specific)
 .claude/settings.local.json
