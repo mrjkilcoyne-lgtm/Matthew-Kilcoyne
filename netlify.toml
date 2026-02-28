@@ -1,0 +1,11 @@
+# ExploitGuard - Netlify Deployment
+# No build step needed - standalone HTML/JS app loaded from CDN
+
+[build]
+  base = "exploit-guard/app"
+  publish = "."
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
