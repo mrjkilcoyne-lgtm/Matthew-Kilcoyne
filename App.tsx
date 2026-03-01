@@ -4,8 +4,9 @@ import { Interview } from './components/Interview';
 import { Report } from './components/Report';
 import { InterviewAnswers, ReportData } from './types';
 import { generateConfluationReport } from './services/geminiService';
+import { DashboardApp } from './dashboard/DashboardApp';
 
-type Phase = 'welcome' | 'interview' | 'analysis' | 'report';
+type Phase = 'welcome' | 'interview' | 'analysis' | 'report' | 'dashboard';
 
 const App: React.FC = () => {
   const [phase, setPhase] = useState<Phase>('welcome');
@@ -16,18 +17,20 @@ const App: React.FC = () => {
     setPhase('interview');
   };
 
+  const openDashboard = () => {
+    setPhase('dashboard');
+  };
+
   const handleInterviewComplete = async (completedAnswers: InterviewAnswers) => {
     setAnswers(completedAnswers);
     setPhase('analysis');
-    
+
     try {
       const report = await generateConfluationReport(completedAnswers);
       setReportData(report);
       setPhase('report');
     } catch (error) {
       console.error("Failed to generate report", error);
-      // In a real app, handle error state better. 
-      // For now, we revert or show alert (implied)
       alert("Something went wrong generating your strategy. Please try again.");
       setPhase('welcome');
     }
@@ -39,6 +42,11 @@ const App: React.FC = () => {
     setReportData(null);
   };
 
+  // Dashboard gets full-screen treatment
+  if (phase === 'dashboard') {
+    return <DashboardApp onBackToEngine={() => setPhase('welcome')} />;
+  }
+
   return (
     <div className="flex flex-col h-screen bg-[#FDFBF7] font-sans text-stone-900 overflow-hidden selection:bg-stone-200 selection:text-stone-900">
       {/* Header */}
@@ -49,11 +57,20 @@ const App: React.FC = () => {
           </div>
           <h1 className="font-serif font-medium text-lg tracking-tight text-stone-800 hidden md:block">The Confluation Engine</h1>
         </div>
+        <button
+          onClick={openDashboard}
+          className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity shadow-md"
+        >
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" />
+          </svg>
+          Social Pulse
+        </button>
       </header>
 
       {/* Main Content Area */}
       <main className="flex-1 relative overflow-hidden flex flex-col">
-        
+
         {phase === 'welcome' && <Welcome onStart={startInterview} />}
 
         {phase === 'interview' && <Interview onComplete={handleInterviewComplete} />}
@@ -75,10 +92,10 @@ const App: React.FC = () => {
         )}
 
         {phase === 'report' && reportData && (
-          <Report 
-            data={reportData} 
-            answers={answers} 
-            onReset={resetApp} 
+          <Report
+            data={reportData}
+            answers={answers}
+            onReset={resetApp}
           />
         )}
 
