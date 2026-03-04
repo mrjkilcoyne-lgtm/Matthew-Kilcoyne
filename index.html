@@ -3,33 +3,114 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Confluation Engine</title>
+    <title>Back CANZUK — One Family, Four Nations</title>
+    <meta name="description" content="Canada, Australia, New Zealand & the United Kingdom — free movement, free trade, shared defence, common law. Join the movement." />
+    <meta property="og:title" content="Back CANZUK — One Family, Four Nations" />
+    <meta property="og:description" content="Free movement, free trade, shared defence, common law. Four nations, one community." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://backcanzuk.com" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌏</text></svg>" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              navy: { 50: '#e8edf5', 100: '#c5cfea', 200: '#9eadd8', 300: '#778bc6', 400: '#5a72b8', 500: '#3d59aa', 600: '#3750a0', 700: '#2d4493', 800: '#243886', 900: '#012169', 950: '#0C1B33' },
+              crimson: { 50: '#fce8ec', 100: '#f8c5ce', 200: '#f09eae', 300: '#e7778d', 400: '#e15a74', 500: '#db3d5b', 600: '#C8102E', 700: '#b00d27', 800: '#930a20', 900: '#750819' },
+              gold: { 400: '#D4AF37', 500: '#CFB53B', 600: '#B8960C' },
+            },
+            fontFamily: {
+              serif: ['Playfair Display', 'Georgia', 'serif'],
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+            },
+            animation: {
+              'fade-in': 'fadeIn 1s ease-out forwards',
+              'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+              'fade-in-down': 'fadeInDown 0.6s ease-out forwards',
+              'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
+              'slide-in-right': 'slideInRight 0.8s ease-out forwards',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'float': 'float 6s ease-in-out infinite',
+              'glow': 'glow 2s ease-in-out infinite alternate',
+            },
+            keyframes: {
+              fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+              fadeInUp: { '0%': { opacity: '0', transform: 'translateY(30px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+              fadeInDown: { '0%': { opacity: '0', transform: 'translateY(-20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+              slideInLeft: { '0%': { opacity: '0', transform: 'translateX(-40px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
+              slideInRight: { '0%': { opacity: '0', transform: 'translateX(40px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
+              float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+              glow: { '0%': { boxShadow: '0 0 5px rgba(200, 16, 46, 0.3)' }, '100%': { boxShadow: '0 0 20px rgba(200, 16, 46, 0.6), 0 0 40px rgba(1, 33, 105, 0.3)' } },
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-      body {
-        font-family: 'Inter', sans-serif;
+      body { font-family: 'Inter', sans-serif; }
+      h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
+      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      .bg-union-pattern {
+        background-image:
+          linear-gradient(45deg, transparent 40%, rgba(200,16,46,0.03) 40%, rgba(200,16,46,0.03) 60%, transparent 60%),
+          linear-gradient(-45deg, transparent 40%, rgba(1,33,105,0.03) 40%, rgba(1,33,105,0.03) 60%, transparent 60%);
       }
-      h1, h2, h3, h4, .font-serif {
-        font-family: 'Playfair Display', serif;
+      .text-gradient-canzuk {
+        background: linear-gradient(135deg, #C8102E 0%, #012169 50%, #C8102E 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
-      /* Hide scrollbar for Chrome, Safari and Opera */
-      .scrollbar-hide::-webkit-scrollbar {
-          display: none;
+      .border-gradient-canzuk {
+        border-image: linear-gradient(135deg, #C8102E, #012169, #C8102E) 1;
       }
-      /* Hide scrollbar for IE, Edge and Firefox */
-      .scrollbar-hide {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
+      @keyframes scroll-greeting {
+        0%, 16% { opacity: 1; transform: translateY(0); }
+        20%, 36% { opacity: 0; transform: translateY(-20px); }
+        40% { opacity: 0; transform: translateY(20px); }
+        44%, 60% { opacity: 1; transform: translateY(0); }
+        64%, 80% { opacity: 0; transform: translateY(-20px); }
+        84% { opacity: 0; transform: translateY(20px); }
+        88%, 100% { opacity: 1; transform: translateY(0); }
       }
+      .hero-gradient {
+        background: linear-gradient(135deg, #0C1B33 0%, #012169 30%, #1a2744 60%, #0C1B33 100%);
+      }
+      .card-shine {
+        position: relative;
+        overflow: hidden;
+      }
+      .card-shine::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          to bottom right,
+          rgba(255,255,255,0) 0%,
+          rgba(255,255,255,0.03) 40%,
+          rgba(255,255,255,0.08) 50%,
+          rgba(255,255,255,0.03) 60%,
+          rgba(255,255,255,0) 100%
+        );
+        transform: rotate(-45deg);
+        transition: transform 0.5s;
+      }
+      .card-shine:hover::before {
+        transform: rotate(-45deg) translate(10%, 10%);
+      }
+      html { scroll-behavior: smooth; }
     </style>
   <script type="importmap">
 {
   "imports": {
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
-    "react-markdown": "https://aistudiocdn.com/react-markdown@^10.1.0",
     "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "react": "https://aistudiocdn.com/react@^19.2.0"
@@ -37,7 +118,8 @@
 }
 </script>
 </head>
-  <body>
+  <body class="bg-navy-950 text-white">
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>

@@ -1,32 +1,38 @@
-export interface Message {
-  sender: 'bot' | 'user';
-  text: string;
+export interface Nation {
+  name: string;
+  code: string;
+  flag: string;
+  greeting: string;
+  greetingLang: string;
+  demonym: string;
+  capital: string;
+  tagline: string;
+  description: string;
+  color: string;
+  highlights: string[];
 }
 
-export interface InterviewAnswers {
-  origin?: string;
-  pivot?: string;
-  struggle?: string;
-  superpower?: string;
-  soft_heart?: string;
-  compliment?: string;
-  friction?: string;
-  customer?: string;
-  forefront?: string;
-  legacy?: string;
-  [key: string]: string | undefined;
-}
-
-export interface ReportData {
+export interface Pillar {
+  id: string;
   title: string;
-  narrative_thread: string;
-  unfair_advantage: string;
-  confluation_thesis: string;
-  immediate_vision: string;
-  market_analysis?: string; // For the live research tab
+  subtitle: string;
+  description: string;
+  icon: string;
+  stats: { label: string; value: string }[];
+  points: string[];
 }
 
-export interface Question {
-  id: keyof InterviewAnswers;
-  text: string;
+export interface CommunityRole {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  benefits: string[];
+}
+
+export interface Stat {
+  value: string;
+  label: string;
+  prefix?: string;
+  suffix?: string;
 }
