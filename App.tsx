@@ -5,6 +5,7 @@ import { Report } from './components/Report';
 import { InterviewAnswers, ReportData } from './types';
 import { generateConfluationReport } from './services/geminiService';
 import { DashboardApp } from './dashboard/DashboardApp';
+import { InstallPrompt } from './components/InstallPrompt';
 
 type Phase = 'welcome' | 'interview' | 'analysis' | 'report' | 'dashboard';
 
@@ -100,6 +101,7 @@ const App: React.FC = () => {
         )}
 
       </main>
+      <InstallPrompt />
     </div>
   );
 };

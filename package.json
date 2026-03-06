@@ -1,12 +1,18 @@
 {
-  "name": "the-confluation-engine",
+  "name": "tardai",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "TARDAI - The Confluation Engine. AI-powered career strategy available as web app, PWA, and CLI.",
+  "bin": {
+    "tardai": "./cli/tardai.mjs"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cli": "node cli/tardai.mjs",
+    "tardai": "node cli/tardai.mjs"
   },
   "dependencies": {
     "@google/genai": "^1.30.0",

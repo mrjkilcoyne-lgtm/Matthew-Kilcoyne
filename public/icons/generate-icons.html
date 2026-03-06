@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head><title>TARDAI Icon Generator</title></head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+// Generate SVG-based icons at various sizes
+const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+
+sizes.forEach(size => {
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+
+  // Background
+  ctx.fillStyle = '#292524';
+  ctx.beginPath();
+  ctx.roundRect(0, 0, size, size, size * 0.15);
+  ctx.fill();
+
+  // Inner glow
+  const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size * 0.4);
+  gradient.addColorStop(0, 'rgba(253,251,247,0.08)');
+  gradient.addColorStop(1, 'transparent');
+  ctx.fillStyle = gradient;
+  ctx.fill();
+
+  // "T" letter
+  ctx.fillStyle = '#FDFBF7';
+  ctx.font = `italic ${size * 0.55}px serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('T', size/2, size/2 + size * 0.02);
+
+  // Download link
+  const link = document.createElement('a');
+  link.download = `icon-${size}.png`;
+  link.href = canvas.toDataURL();
+  link.textContent = `Download ${size}x${size}`;
+  document.body.appendChild(link);
+  document.body.appendChild(document.createElement('br'));
+});
+</script>
+</body>
+</html>
