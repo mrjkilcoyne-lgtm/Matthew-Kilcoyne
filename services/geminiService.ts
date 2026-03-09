@@ -4,6 +4,18 @@ import { InterviewAnswers, ReportData } from "../types";
 const apiKey = process.env.API_KEY || '';
 const ai = new GoogleGenAI({ apiKey });
 
+const withRetry = async <T>(fn: () => Promise<T>, retries = 2, delay = 1000): Promise<T> => {
+  for (let i = 0; i <= retries; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      if (i === retries) throw error;
+      await new Promise(r => setTimeout(r, delay * (i + 1)));
+    }
+  }
+  throw new Error("Unreachable");
+};
+
 const reportSchema: Schema = {
   type: Type.OBJECT,
   properties: {
@@ -30,15 +42,15 @@ export const generateConfluationReport = async (answers: InterviewAnswers): Prom
   }
 
   try {
-    const response = await ai.models.generateContent({
+    const response = await withRetry(() => ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: `
         You are "The Confluation Engine", a high-end career strategist and biographer.
         Analyze the following interview answers from a user to construct a "Confluation Strategy".
-        
+
         User Data:
         ${JSON.stringify(answers, null, 2)}
-        
+
         Tone: Professional, insightful, slightly philosophical, encouraging but grounded in reality.
         Output: A JSON object matching the schema.
       `,
@@ -47,7 +59,7 @@ export const generateConfluationReport = async (answers: InterviewAnswers): Prom
         responseSchema: reportSchema,
         temperature: 0.7,
       },
-    });
+    }));
 
     if (response.text) {
       return JSON.parse(response.text) as ReportData;
@@ -63,24 +75,24 @@ export const runMarketResearch = async (answers: InterviewAnswers): Promise<stri
   if (!apiKey) return "API Key missing. Cannot run live analysis.";
 
   try {
-    const response = await ai.models.generateContent({
+    const response = await withRetry(() => ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: `
         Act as a Venture Capitalist and Market Researcher.
-        
+
         Business Thesis:
         Combine deep expertise in "${answers.superpower}" with the market of "${answers.soft_heart}".
         Problem identified: "${answers.friction}".
         Target Customer: "${answers.customer}".
-        
+
         Task:
         1. Perform a brief market sizing analysis (TAM/SAM/SOM estimates based on general knowledge).
         2. Identify 3 potential competitor types who might be missing this specific "expert" angle.
         3. Critique this idea brutally: what is the main failure mode?
-        
+
         Format: Markdown. Keep it concise (under 300 words).
       `,
-    });
+    }));
     return response.text || "Analysis failed.";
   } catch (error) {
     console.error("Gemini Research Error:", error);

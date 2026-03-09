@@ -156,6 +156,8 @@ const generateDemoAlerts = (): DashboardAlert[] => [
   },
 ];
 
+const initialConnections = generateDemoConnections();
+
 // ============================================================
 // DASHBOARD APP COMPONENT
 // ============================================================
@@ -167,9 +169,9 @@ interface DashboardAppProps {
 export const DashboardApp: React.FC<DashboardAppProps> = ({ onBackToEngine }) => {
   const [currentView, setCurrentView] = useState<DashboardView>('overview');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [connections, setConnections] = useState<PlatformConnection[]>(generateDemoConnections);
-  const [metrics, setMetrics] = useState<Record<string, PlatformMetrics>>(() => generateDemoMetrics(generateDemoConnections()));
-  const [posts] = useState<PostAnalytics[]>(() => generateDemoPosts(generateDemoConnections()));
+  const [connections, setConnections] = useState<PlatformConnection[]>(initialConnections);
+  const [metrics, setMetrics] = useState<Record<string, PlatformMetrics>>(() => generateDemoMetrics(initialConnections));
+  const [posts] = useState<PostAnalytics[]>(() => generateDemoPosts(initialConnections));
   const [suggestions, setSuggestions] = useState<ContentSuggestion[]>([]);
   const [growthData, setGrowthData] = useState<Record<string, GrowthAnalysis>>({});
   const [alerts] = useState<DashboardAlert[]>(generateDemoAlerts);

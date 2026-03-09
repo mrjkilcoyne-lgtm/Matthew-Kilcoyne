@@ -105,11 +105,11 @@ export const Interview: React.FC<InterviewProps> = ({ onComplete }) => {
   return (
     <div className="flex-1 flex flex-col max-w-3xl mx-auto w-full bg-white border-x border-stone-100 shadow-2xl shadow-stone-200/50 relative">
       {/* Progress Bar (Mobile/Desktop overlap) */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-stone-100 z-10">
+      <div className="absolute top-0 left-0 w-full h-1 bg-stone-100 z-10" aria-label="Interview progress" role="progressbar" aria-valuenow={progressPercentage} aria-valuemin={0} aria-valuemax={100}>
         <div className="h-full bg-stone-800 transition-all duration-700" style={{ width: `${progressPercentage}%` }} />
       </div>
 
-      <div className="flex-1 overflow-y-auto p-6 space-y-8 scrollbar-hide pb-32">
+      <div className="flex-1 overflow-y-auto p-6 space-y-8 scrollbar-hide pb-32" role="log" aria-live="polite">
         {messages.map((msg, idx) => (
           <div 
             key={idx} 
@@ -156,9 +156,10 @@ export const Interview: React.FC<InterviewProps> = ({ onComplete }) => {
             autoFocus
             className="w-full pl-6 pr-14 py-4 bg-[#FDFBF7] border-0 rounded-xl focus:outline-none focus:ring-1 focus:ring-stone-300 transition-all placeholder:text-stone-400 resize-none min-h-[60px]"
           />
-          <button 
+          <button
             onClick={handleSendMessage}
             disabled={!inputValue.trim()}
+            aria-label="Send message"
             className="absolute right-3 bottom-3 p-2 bg-stone-800 text-white rounded-lg hover:bg-black disabled:opacity-30 disabled:hover:bg-stone-800 transition-colors"
           >
             <Send size={16} />

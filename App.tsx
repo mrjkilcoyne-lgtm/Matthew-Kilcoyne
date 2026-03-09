@@ -12,6 +12,7 @@ const App: React.FC = () => {
   const [phase, setPhase] = useState<Phase>('welcome');
   const [answers, setAnswers] = useState<InterviewAnswers>({});
   const [reportData, setReportData] = useState<ReportData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const startInterview = () => {
     setPhase('interview');
@@ -31,8 +32,8 @@ const App: React.FC = () => {
       setPhase('report');
     } catch (error) {
       console.error("Failed to generate report", error);
-      alert("Something went wrong generating your strategy. Please try again.");
-      setPhase('welcome');
+      setError("Something went wrong generating your strategy. Please try again.");
+      setPhase('interview');
     }
   };
 
@@ -40,6 +41,7 @@ const App: React.FC = () => {
     setPhase('welcome');
     setAnswers({});
     setReportData(null);
+    setError(null);
   };
 
   // Dashboard gets full-screen treatment
@@ -59,6 +61,7 @@ const App: React.FC = () => {
         </div>
         <button
           onClick={openDashboard}
+          aria-label="Social Pulse dashboard"
           className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity shadow-md"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -70,6 +73,13 @@ const App: React.FC = () => {
 
       {/* Main Content Area */}
       <main className="flex-1 relative overflow-hidden flex flex-col">
+
+        {error && (
+          <div className="absolute top-0 left-0 right-0 z-20 bg-red-50 border-b border-red-200 px-6 py-3 flex items-center justify-between">
+            <p className="text-sm text-red-700">{error}</p>
+            <button onClick={() => setError(null)} className="text-red-500 hover:text-red-700 text-sm font-medium">Dismiss</button>
+          </div>
+        )}
 
         {phase === 'welcome' && <Welcome onStart={startInterview} />}
 

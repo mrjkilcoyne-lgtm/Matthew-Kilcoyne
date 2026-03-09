@@ -25,25 +25,31 @@ export const ActionTabs: React.FC<ActionTabsProps> = ({ answers, report }) => {
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
-      <div className="flex border-b border-stone-200">
-        <button 
+      <div className="flex border-b border-stone-200" role="tablist">
+        <button
           onClick={() => setActiveTab('research')}
+          role="tab"
+          aria-selected={activeTab === 'research'}
           className={`flex-1 py-4 text-sm font-medium transition-colors ${activeTab === 'research' ? 'bg-white text-blue-600 border-b-2 border-blue-600' : 'bg-stone-50 text-stone-500 hover:bg-stone-100'}`}
         >
           <div className="flex items-center justify-center gap-2">
             <Search size={16} /> Deep Research
           </div>
         </button>
-        <button 
+        <button
           onClick={() => setActiveTab('grants')}
+          role="tab"
+          aria-selected={activeTab === 'grants'}
           className={`flex-1 py-4 text-sm font-medium transition-colors ${activeTab === 'grants' ? 'bg-white text-emerald-600 border-b-2 border-emerald-600' : 'bg-stone-50 text-stone-500 hover:bg-stone-100'}`}
         >
           <div className="flex items-center justify-center gap-2">
             <Coins size={16} /> Grants & Capital
           </div>
         </button>
-        <button 
+        <button
           onClick={() => setActiveTab('jobs')}
+          role="tab"
+          aria-selected={activeTab === 'jobs'}
           className={`flex-1 py-4 text-sm font-medium transition-colors ${activeTab === 'jobs' ? 'bg-white text-purple-600 border-b-2 border-purple-600' : 'bg-stone-50 text-stone-500 hover:bg-stone-100'}`}
         >
           <div className="flex items-center justify-center gap-2">
@@ -52,7 +58,7 @@ export const ActionTabs: React.FC<ActionTabsProps> = ({ answers, report }) => {
         </button>
       </div>
 
-      <div className="p-8 min-h-[300px]">
+      <div className="p-8 min-h-[300px]" role="tabpanel">
         {activeTab === 'research' && (
           <div className="space-y-6 animate-in fade-in duration-300">
             <p className="text-stone-600">
@@ -81,9 +87,9 @@ export const ActionTabs: React.FC<ActionTabsProps> = ({ answers, report }) => {
 
             {researchResult && (
                <div className="bg-stone-900 text-stone-300 p-6 rounded-lg font-mono text-sm leading-relaxed overflow-x-auto">
-                 <ReactMarkdown className="prose prose-invert prose-sm max-w-none">
-                    {researchResult}
-                 </ReactMarkdown>
+                 <div className="prose prose-invert prose-sm max-w-none">
+                   <ReactMarkdown>{researchResult}</ReactMarkdown>
+                 </div>
                </div>
             )}
             
