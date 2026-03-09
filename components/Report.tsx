@@ -11,7 +11,7 @@ interface ReportProps {
 
 export const Report: React.FC<ReportProps> = ({ data, answers, onReset }) => {
   return (
-    <div className="flex-1 bg-[#F2F0EB] overflow-y-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
+    <div className="flex-1 bg-[#F2F0EB] overflow-y-auto animate-in fade-in slide-in-from-bottom-8 duration-700" role="article">
       <div className="max-w-5xl mx-auto bg-white shadow-xl shadow-stone-300/40 min-h-screen flex flex-col border-x border-stone-200">
         
         {/* Report Header */}
@@ -88,8 +88,9 @@ export const Report: React.FC<ReportProps> = ({ data, answers, onReset }) => {
 
         {/* Document Footer */}
         <div className="p-8 bg-white border-t border-stone-200 flex justify-between items-center text-stone-400 text-sm">
-          <button 
+          <button
             onClick={onReset}
+            aria-label="Start over"
             className="hover:text-stone-900 transition-colors flex items-center gap-2 font-medium"
           >
             <ChevronLeft size={16} /> Start Over

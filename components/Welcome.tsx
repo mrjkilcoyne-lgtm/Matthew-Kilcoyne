@@ -20,8 +20,9 @@ export const Welcome: React.FC<WelcomeProps> = ({ onStart }) => {
           At the end, our AI engine will conflate your history into a future strategy.
         </p>
         <div className="pt-4">
-          <button 
+          <button
             onClick={onStart}
+            aria-label="Start the interview"
             className="group relative inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-stone-800 rounded-full hover:bg-stone-700 transition-all hover:scale-105 shadow-xl shadow-stone-200"
           >
             Start the Interview

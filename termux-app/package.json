@@ -1,0 +1,20 @@
+{
+  "name": "matthew-kilcoyne",
+  "version": "1.0.0",
+  "description": "The Confluation Engine — native Termux interview app for Pixel 10XL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "setup-model": "node lib/download-model.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "node-llama-cpp": "^3.1.0",
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "The Confluation Engine",
+  "license": "MIT"
+}

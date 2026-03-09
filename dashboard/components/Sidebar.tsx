@@ -54,13 +54,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto scrollbar-hide">
+      <nav className="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto scrollbar-hide" role="navigation" aria-label="Dashboard navigation">
         {NAV_ITEMS.map(({ view, icon: Icon, label }) => {
           const isActive = currentView === view;
           return (
             <button
               key={view}
               onClick={() => onNavigate(view)}
+              aria-current={isActive ? 'page' : undefined}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150 group ${
                 isActive
                   ? 'bg-indigo-600/20 text-indigo-300 font-medium'

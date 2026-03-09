@@ -2,7 +2,7 @@
 // MINI CHART COMPONENTS - Pure SVG, zero dependencies
 // ============================================================
 
-import React from 'react';
+import React, { useId } from 'react';
 
 interface SparklineProps {
   data: number[];
@@ -210,6 +210,8 @@ export const AreaChart: React.FC<AreaChartProps> = ({
   showGrid = true,
   showLabels = true,
 }) => {
+  const gradientId = useId();
+
   if (data.length < 2) return null;
 
   const padding = { top: 10, right: 10, bottom: showLabels ? 25 : 10, left: 40 };
@@ -237,7 +239,7 @@ export const AreaChart: React.FC<AreaChartProps> = ({
   return (
     <svg width={width} height={height} className={className} viewBox={`0 0 ${width} ${height}`}>
       <defs>
-        <linearGradient id={`gradient-${color.replace('#', '')}`} x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={color} stopOpacity="0.3" />
           <stop offset="100%" stopColor={color} stopOpacity="0.02" />
         </linearGradient>
@@ -255,7 +257,7 @@ export const AreaChart: React.FC<AreaChartProps> = ({
         );
       })}
 
-      <path d={areaPath} fill={`url(#gradient-${color.replace('#', '')})`} />
+      <path d={areaPath} fill={`url(#${gradientId})`} />
       <path d={linePath} fill="none" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
 
       {points.map((p, i) => (
