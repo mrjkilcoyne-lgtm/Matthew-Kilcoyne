@@ -67,16 +67,18 @@ curl -sL https://raw.githubusercontent.com/mrjkilcoyne-lgtm/Matthew-Kilcoyne/mai
 3. Or manually:
 ```bash
 pkg install nodejs git -y
-git clone <repo-url> ~/tardai
+git clone https://github.com/mrjkilcoyne-lgtm/Matthew-Kilcoyne.git ~/tardai
 node ~/tardai/cli/tardai.mjs
 ```
+
+> **Note:** Do NOT run `npm install` on Termux — the CLI is self-contained and needs no npm dependencies. The dev dependencies include packages that don't support Android.
 
 ### iOS (iSH / a-Shell)
 1. Install [iSH](https://apps.apple.com/app/ish-shell/id1436902243) from the App Store
 2. In iSH:
 ```bash
 apk add nodejs git
-git clone <repo-url> ~/tardai
+git clone https://github.com/mrjkilcoyne-lgtm/Matthew-Kilcoyne.git ~/tardai
 node ~/tardai/cli/tardai.mjs
 ```
 
